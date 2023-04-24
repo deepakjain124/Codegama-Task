@@ -49,7 +49,10 @@ const Cart = () => {
                   <div className="flex justify-around items-center cursor-pointer text-2xl gap-10">
                     <p onClick={() => dispatch(increment(item))}>+</p>
                     <p>{item.count}</p>
-                    <p onClick={() => dispatch(decrement(item))} className="">
+                    <p
+                      onClick={() => dispatch(decrement(item))}
+                      className={`${item.count === 1 && "cursor-not-allowed"}`}
+                    >
                       -
                     </p>
                   </div>

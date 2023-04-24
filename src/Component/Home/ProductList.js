@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { CloseCircleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
+import { message } from "antd";
 const LazyImageComponent = lazy(() =>
   import("../../common/ImageComponent/index")
 );
@@ -15,6 +16,14 @@ const ProductList = () => {
   const [categotry, setCategory] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const [messageApi, contextHolder] = message.useMessage();
+
+  const success = () => {
+    message.open({
+      type: "success",
+      content: "Item Added to cart",
+    });
+  };
   const getProductItem = () => {
     getData()
       .then((i) => {
@@ -103,7 +112,10 @@ const ProductList = () => {
                       </p>
                       <button
                         className="border-solid hover:shadow-2xl p-2 text-white bg-purple-300 rounded-md"
-                        onClick={() => dispatch(addToCart(item))}
+                        onClick={() => {
+                          dispatch(addToCart(item));
+                          success();
+                        }}
                       >
                         Add To cart
                       </button>
